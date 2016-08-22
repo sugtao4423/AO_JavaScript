@@ -20,9 +20,6 @@ var JSON2LineGraph = function(options){
 	graph.height = graph.getBoundingClientRect().height;
 	graph.width = graph.getBoundingClientRect().width;
 
-	document.write(graph.height);
-	document.write(graph.width);
-
 	var c = graph.getContext('2d');
 	c.lineWidth = 2;
 	c.strokeStyle = '#333';
@@ -33,7 +30,7 @@ var JSON2LineGraph = function(options){
 	c.beginPath();
 	c.moveTo(xPadding, 0);
 	c.lineTo(xPadding, graph.height - yPadding);
-	c.lineTo(graph.width, graph.height - yPadding);
+	c.lineTo(graph.width - xPadding, graph.height - yPadding);
 	c.stroke();
 
 	// write X line text
