@@ -1,17 +1,18 @@
 var JSON2LineGraph = function(options){
-	var element, yUnit, xKey, yKeys, json, lineColors;
+	var element, xKey, yKeys, json, yUnit, lineColors;
 
-	var optionNames = ['element', 'yUnit', 'xKey', 'yKeys', 'json'];
+	var optionNames = ['element', 'xKey', 'yKeys', 'json'];
 
 	for(var i = 0; i < optionNames.length; i++){
 		if(options[optionNames[i]] === undefined)
 			throw "undefined '" + optionNames[i] + "'";
 	}
 	element = options['element'];
-	yUnit = options['yUnit'];
 	xKey = options['xKey'];
 	yKeys = options['yKeys'];
 	json = JSON.parse(options['json']);
+
+	yUnit = options['yUnit'] === undefined ? '' : options['yUnit'];
 
 	if(options['lineColors'] !== undefined){
 		if(options['lineColors'].length < yKeys.length)
