@@ -32,7 +32,7 @@ var JSON2Table = function(options) {
 	var thead = table.createTHead();
 	// insert thead's row
 	var theadRow = thead.insertRow(-1);
-	// create th keys times, append thead's row, keys name title
+	// create th 'keys' times. append thead's row. title is 'keys' value.
 	for(var i = 0; i < keys.length; i++){
 		var th = document.createElement("th");
 		theadRow.appendChild(th);
@@ -41,10 +41,10 @@ var JSON2Table = function(options) {
 
 	// create tbody
 	var tbody = table.createTBody();
-	// insert tbody's row json times
+	// insert tbody's row json list times
 	for(var i = 0; i < json.length; i++){
 		var tbodyRow = tbody.insertRow(-1);
-		// create td keys times, append tbody's row, json value
+		// create td 'keys' times. append tbody's row. value is get from json data.
 		for(var j = 0; j < keys.length; j++){
 			var td = document.createElement("td");
 			tbodyRow.appendChild(td);
