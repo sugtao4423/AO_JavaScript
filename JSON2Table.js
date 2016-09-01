@@ -1,5 +1,5 @@
 var JSON2Table = function(options) {
-	var element, keys, json;
+	var element, keys, json, unit, appendUnitKeys;
 
 	var optionNames = ['element', 'keys', 'json'];
 
@@ -10,6 +10,18 @@ var JSON2Table = function(options) {
 	element = options['element'];
 	keys = options['keys'];
 	json = JSON.parse(options['json']);
+
+	if(options['unit'] !== undefined){
+		unit = options['unit'];
+		if(options['appendUnitKeys'] === undefined)
+			throw 'undefined appendUnitKeys.\nif define unit, define appendUnitKeys.';
+		appendUnitKeys = options['appendUnitKeys'];
+	}else{
+		if(options['appendUnitKeys'] !== undefined)
+			throw 'undefined unit.\nif define appendUnitKeys, define unit.';
+		unit = '';
+		appendUnitKeys = '';
+	}
 
 	// create table element
 	var table = document.createElement("table");
@@ -36,7 +48,10 @@ var JSON2Table = function(options) {
 		for(var j = 0; j < keys.length; j++){
 			var td = document.createElement("td");
 			tbodyRow.appendChild(td);
-			td.innerHTML = json[i][keys[j]];
+			if(appendUnitKeys.indexOf(keys[j]) !== -1)
+				td.innerHTML = json[i][keys[j]] + unit;
+			else
+				td.innerHTML = json[i][keys[j]];
 		}
 	}
 }

@@ -53,7 +53,9 @@
 			new JSON2Table({
 				element : "sample-table",
 				keys : ["date", "temp"],
-				json : data
+				json : data,
+				unit : '℃',
+				appendUnitKeys : ["temp"]
 			});
 			new JSON2LineGraph({
 				element : "canvas",
