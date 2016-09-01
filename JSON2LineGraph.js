@@ -23,7 +23,7 @@ var JSON2LineGraph = function(options){
 	}
 
 	var xPadding = 50;
-	var yPadding = 30;
+	var yPadding = 40;
 
 	var graph = document.getElementById(element);
 	graph.height = graph.getBoundingClientRect().height;
@@ -43,8 +43,23 @@ var JSON2LineGraph = function(options){
 	c.stroke();
 
 	// write X line text
-	for(var i = 0; i < json.length; i++)
-		c.fillText(json[i][xKey], getXPixel(i), graph.height - yPadding + 20);
+	var oldDate = 0;
+	var lineHeight = c.measureText('あ').width;
+	for(var i = 0; i < json.length; i++){
+		var date = new Date(json[i][xKey]);
+		if(oldDate === date.toDateString()){
+			var str = getHM(date);
+			c.fillText(str, getXPixel(i), graph.height - yPadding + 20 + lineHeight);
+		}else{
+			var str = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+			c.fillText(str, getXPixel(i), graph.height - yPadding + 20);
+			c.fillText(getHM(date), getXPixel(i), graph.height - yPadding + 20 + lineHeight);
+			oldDate = date.toDateString();
+		}
+		function getHM(date){
+			return ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+		}
+	}
 
 	// write Y line text
 	c.textAlign = 'right'
@@ -80,7 +95,8 @@ var JSON2LineGraph = function(options){
 			c.fill();
 
 			// write points value
-			c.fillText(num, getXPixel(j) + 10, getYPixel(num) - 15);
+			c.textAlign = 'center';
+			c.fillText(num + yUnit, getXPixel(j), getYPixel(num) - 15);
 		}
 	}
 
