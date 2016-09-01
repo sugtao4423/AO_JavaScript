@@ -1,5 +1,5 @@
 var JSON2LineGraph = function(options){
-	var element, yUnit, xKey, yKeys, json;
+	var element, yUnit, xKey, yKeys, json, lineColors;
 
 	var optionNames = ['element', 'yUnit', 'xKey', 'yKeys', 'json'];
 
@@ -13,6 +13,15 @@ var JSON2LineGraph = function(options){
 	yKeys = options['yKeys'];
 	json = JSON.parse(options['json']);
 
+	if(options['lineColors'] !== undefined){
+		if(options['lineColors'].length < yKeys.length)
+			throw 'short lineColors.\nyKeys: ' + yKeys.length + '\nlineColors: ' + options['lineColors'].length;
+		else
+			lineColors = options['lineColors'];
+	}else{
+		lineColors = ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'];
+	}
+
 	var xPadding = 50;
 	var yPadding = 30;
 
@@ -22,9 +31,9 @@ var JSON2LineGraph = function(options){
 
 	var c = graph.getContext('2d');
 	c.lineWidth = 2;
-	c.strokeStyle = '#333';
-	c.font = 'italic 8pt sans-serif';
-	c.textAlign = "center";
+	c.strokeStyle = '#000000';
+	c.font = '8pt sans-serif';
+	c.textAlign = 'center';
 
 	// draw base line
 	c.beginPath();
@@ -38,14 +47,14 @@ var JSON2LineGraph = function(options){
 		c.fillText(json[i][xKey], getXPixel(i), graph.height - yPadding + 20);
 
 	// write Y line text
-	c.textAlign = "right"
-	c.textBaseline = "middle";
+	c.textAlign = 'right'
+	c.textBaseline = 'middle';
 	for(var i = 0; i < getMaxY(); i += 10)
 		c.fillText(i + yUnit, xPadding - 10, getYPixel(i));
 
 	// draw line
 	for(var i = 0; i < yKeys.length; i++){
-		c.strokeStyle = '#f00';
+		c.strokeStyle = lineColors[i];
 		c.beginPath();
 		c.moveTo(getXPixel(0), getYPixel(Number(json[0][yKeys[i]])));
 		for(var j = 1; j < json.length; j++)
@@ -55,11 +64,23 @@ var JSON2LineGraph = function(options){
 
 	// draw top points
 	for(var i = 0; i < yKeys.length; i++){
-		c.fillStyle = '#333';
 		for(var j = 0; j < json.length; j++){
+			var num = Number(json[j][yKeys[i]]);
+
+			// draw base white point
 			c.beginPath();
-			c.arc(getXPixel(j), getYPixel(Number(json[j][yKeys[i]])), 4, 0, Math.PI * 2, true);
+			c.fillStyle = '#ffffff';
+			c.arc(getXPixel(j), getYPixel(num), 6, 0, Math.PI * 2, true);
 			c.fill();
+
+			// draw point
+			c.beginPath();
+			c.fillStyle = lineColors[i];
+			c.arc(getXPixel(j), getYPixel(num), 4, 0, Math.PI * 2, true);
+			c.fill();
+
+			// write points value
+			c.fillText(num, getXPixel(j) + 10, getYPixel(num) - 15);
 		}
 	}
 
