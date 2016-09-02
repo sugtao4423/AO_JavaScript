@@ -43,7 +43,7 @@
 		<div id="sample-table" style="width:40%; float:left;"></div>
 
 		<div style="width:60%; left:32%; position:fixed;">
-			<canvas id="canvas" style="width:100%; height:100%;"></canvas>
+			<canvas id="sample-canvas" style="width:100%; height:100%;"></canvas>
 		</div>
 
 		<script>
@@ -56,7 +56,7 @@
 				appendUnitKeys : ["used", "free", "swap"]
 			});
 			new JSON2LineGraph({
-				element : "canvas",
+				element : "sample-canvas",
 				xKey : "date",
 				yKeys : ["used", "free", "swap"],
 				json : data,
