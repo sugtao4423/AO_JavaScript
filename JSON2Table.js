@@ -23,28 +23,38 @@ var JSON2Table = function(options) {
 		appendUnitKeys = '';
 	}
 
-	// create table element
+	/*
+	 * create <table>
+	 * target element append <table>
+	 */
 	var table = document.createElement("table");
-	// target element append table element
 	document.getElementById(element).appendChild(table);
 
-	// create thead
+	/*
+	 * create <thead>
+	 * insert row in <thead> once
+	 * create <th> 'keys' length times
+	 * append row in <thead>
+	 * <th> title is 'keys' value.
+	 */
 	var thead = table.createTHead();
-	// insert thead's row
 	var theadRow = thead.insertRow(-1);
-	// create th 'keys' times. append thead's row. title is 'keys' value.
 	for(var i = 0; i < keys.length; i++){
 		var th = document.createElement("th");
 		theadRow.appendChild(th);
 		th.innerHTML = keys[i];
 	}
 
-	// create tbody
+	/*
+	 * create <tbody>
+	 * insert rows in <tbody> json object times
+	 * create <td> 'keys' length times
+	 * append <td> in row of <tbody>
+	 * <td> value is get from json data
+	 */
 	var tbody = table.createTBody();
-	// insert tbody's row json list times
 	for(var i = 0; i < json.length; i++){
 		var tbodyRow = tbody.insertRow(-1);
-		// create td 'keys' times. append tbody's row. value is get from json data.
 		for(var j = 0; j < keys.length; j++){
 			var td = document.createElement("td");
 			tbodyRow.appendChild(td);
