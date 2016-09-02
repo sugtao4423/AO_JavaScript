@@ -31,11 +31,11 @@
 var JSON2LineGraph = function(options){
 	var element, xKey, yKeys, json, yUnit, lineColors;
 
-	var optionNames = ['element', 'xKey', 'yKeys', 'json'];
+	var requireNames = ['element', 'xKey', 'yKeys', 'json'];
 
-	for(var i = 0; i < optionNames.length; i++){
-		if(options[optionNames[i]] === undefined)
-			throw "undefined '" + optionNames[i] + "'";
+	for(var i = 0; i < requireNames.length; i++){
+		if(options[requireNames[i]] === undefined)
+			throw "undefined '" + requireNames[i] + "'";
 	}
 	element = options['element'];
 	xKey = options['xKey'];

@@ -1,11 +1,11 @@
 var JSON2Table = function(options) {
 	var element, keys, json, customTitles, unit, appendUnitKeys;
 
-	var optionNames = ['element', 'keys', 'json'];
+	var requireNames = ['element', 'keys', 'json'];
 
-	for(var i = 0; i < optionNames.length; i++){
-		if(options[optionNames[i]] === undefined)
-			throw "undefined '" + optionNames[i] + "'";
+	for(var i = 0; i < requireNames.length; i++){
+		if(options[requireNames[i]] === undefined)
+			throw "undefined '" + requireNames[i] + "'";
 	}
 	element = options['element'];
 	keys = options['keys'];
