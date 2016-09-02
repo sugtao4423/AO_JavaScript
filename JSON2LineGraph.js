@@ -44,11 +44,10 @@ var JSON2LineGraph = function(options){
 
 	yUnit = options['yUnit'] === undefined ? '' : options['yUnit'];
 
-	if(options['lineColors'] !== undefined){
-		if(options['lineColors'].length < yKeys.length)
-			throw 'short lineColors.\nyKeys: ' + yKeys.length + '\nlineColors: ' + options['lineColors'].length;
-		else
-			lineColors = options['lineColors'];
+	lineColors = options['lineColors'];
+	if(lineColors !== undefined){
+		if(lineColors.length < yKeys.length)
+			throw "short 'lineColors'\nyKeys: " + yKeys.length + '\nlineColors: ' + lineColors.length;
 	}else{
 		lineColors = ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'];
 	}
@@ -64,7 +63,7 @@ var JSON2LineGraph = function(options){
 	c.font = '8pt sans-serif';
 	c.textAlign = 'center';
 
-	// write X line text
+	// write X line date
 	var oldDate = 0;
 	var lineHeight = c.measureText('あ').width;
 	for(var i = 0; i < json.length; i++){
