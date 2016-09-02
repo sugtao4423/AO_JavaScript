@@ -52,7 +52,7 @@ var JSON2LineGraph = function(options){
 		lineColors = ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'];
 	}
 
-	var xPadding = 50;
+	var xPadding = String(getMaxY()).length * 20;
 	var yPadding = 40;
 
 	var graph = document.getElementById(element);
@@ -90,9 +90,10 @@ var JSON2LineGraph = function(options){
 	c.textBaseline = 'middle';
 	c.lineWidth = 1;
 	c.strokeStyle = '#e0e0e0'
-	for(var i = 0; i < getMaxY(); i += 10){
+	var maxY = getMaxY();
+	for(var i = 0; i < maxY + maxY / 2; i += maxY / 5){
 		var yPixel = getYPixel(i);
-		c.fillText(i + yUnit, xPadding - 10, yPixel);
+		c.fillText(Math.round(i) + yUnit, xPadding - 10, yPixel);
 		c.beginPath();
 		c.moveTo(xPadding, yPixel);
 		c.lineTo(graph.width, yPixel);
@@ -165,6 +166,6 @@ var JSON2LineGraph = function(options){
 
 	// Return the y pixel for a graph point
 	function getYPixel(val){
-		return graph.height - (((graph.height - yPadding) / getMaxY()) * val) - yPadding;
+		return graph.height - (((graph.height - yPadding * 3) / getMaxY()) * val) - yPadding;
 	}
 }
