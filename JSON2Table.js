@@ -1,5 +1,5 @@
 var JSON2Table = function(options) {
-	var element, keys, json, unit, appendUnitKeys;
+	var element, keys, json, customTitles, unit, appendUnitKeys;
 
 	var optionNames = ['element', 'keys', 'json'];
 
@@ -11,14 +11,20 @@ var JSON2Table = function(options) {
 	keys = options['keys'];
 	json = JSON.parse(options['json']);
 
-	if(options['unit'] !== undefined){
-		if(options['appendUnitKeys'] === undefined)
-			throw 'undefined appendUnitKeys.\nif define unit, define appendUnitKeys.';
-		unit = options['unit'];
-		appendUnitKeys = options['appendUnitKeys'];
+	customTitles = options['customTitles'];
+	unit = options['unit'];
+	appendUnitKeys = options['appendUnitKeys'];
+
+	if(customTitles !== undefined){
+		if(customTitles.length < keys.length)
+			throw "short 'customTitles'\nkeys: " + keys.length + '\ncustomTitles: ' + customTitles.length;
+	}
+	if(unit !== undefined){
+		if(appendUnitKeys === undefined)
+			throw "undefined 'appendUnitKeys'\nif define 'unit', define 'appendUnitKeys'";
 	}else{
-		if(options['appendUnitKeys'] !== undefined)
-			throw 'undefined unit.\nif define appendUnitKeys, define unit.';
+		if(appendUnitKeys !== undefined)
+			throw "undefined 'unit'\nif define 'appendUnitKeys', define 'unit'";
 		unit = '';
 		appendUnitKeys = '';
 	}
@@ -42,7 +48,10 @@ var JSON2Table = function(options) {
 	for(var i = 0; i < keys.length; i++){
 		var th = document.createElement("th");
 		theadRow.appendChild(th);
-		th.innerHTML = keys[i];
+		if(customTitles === undefined)
+			th.innerHTML = keys[i];
+		else
+			th.innerHTML = customTitles[i];
 	}
 
 	/*

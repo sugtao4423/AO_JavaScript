@@ -7,11 +7,12 @@ JSONデータをテーブルにして表示するJavaScript
     ex. `<div id="sample-table"></div>`
 1. `<script>`タグ内で JSON2Table.js を宣言
 
-```javascript:Minimum
+```javascript
 new JSON2Table({
     element : '',
     keys : [],
     json : [],
+    customTitles : [],
     unit : '',
     appendUnitKeys : []
 });
@@ -23,6 +24,7 @@ new JSON2Table({
 element | String | 挿入する対象要素ID | :heavy_check_mark:
 keys | String Array | JSONデータから取得するキー | :heavy_check_mark:
 json | String Array | JSONデータ | :heavy_check_mark:
+customTitles | String Array | カラムタイトル |
 unit | String | 単位 |
 appendUnitKeys | String Array | 単位を付与するJSONデータのキー |
 
@@ -34,7 +36,7 @@ JSONデータを折れ線グラフにして表示するJavaScript
     ex. `<canvas id="sample-canvas"></canvas>`
 1. `<script>`タグ内で JSON2LineGraph.js を宣言
 
-```
+```javascript
 new JSON2LineGraph({
     element : '',
     xKey : '',
