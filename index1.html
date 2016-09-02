@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>ServerRoom Temperature</title>
+		<title>Main Server Status</title>
 		<script type="text/javascript" src="JSON2Table.js"></script>
 		<script type="text/javascript" src="JSON2LineGraph.js"></script>
 
@@ -38,30 +38,29 @@
 	</head>
 
 	<body>
-		<p><a href="index1.html">Main Server Status</a></p>
+		<p><a href="index.html">ServerRoom Temperature</a></p>
 
-		<div id="sample-table" style="width:30%; float:left;"></div>
+		<div id="sample-table" style="width:40%; float:left;"></div>
 
-		<div style="width:70%; left:25%; position:fixed;">
+		<div style="width:60%; left:32%; position:fixed;">
 			<canvas id="canvas" style="width:100%; height:100%;"></canvas>
 		</div>
 
 		<script>
-			var data = '[{"date":"2016-09-01 19:00","temp":"21.93"},{"date":"2016-09-01 20:00","temp":"21.26"},{"date":"2016-09-01 21:00","temp":"22.25"},{"date":"2016-09-01 22:00","temp":"22.02"},{"date":"2016-09-01 23:00","temp":"21.63"},{"date":"2016-09-02 00:00","temp":"21.8"},{"date":"2016-09-02 01:00","temp":"21.73"},{"date":"2016-09-02 02:00","temp":"21.1"},{"date":"2016-09-02 03:00","temp":"22.02"}]';
+			var data = '[{"date":"2016-08-21 18:00","used":4086,"free":20017,"swap":252},{"date":"2016-08-22 00:00","used":4138,"free":19965,"swap":252},{"date":"2016-08-22 06:00","used":4344,"free":19760,"swap":251},{"date":"2016-08-22 12:00","used":4311,"free":19792,"swap":251},{"date":"2016-08-22 18:00","used":4292,"free":19812,"swap":250},{"date":"2016-08-23 00:00","used":4235,"free":19869,"swap":249},{"date":"2016-08-23 06:00","used":3961,"free":20143,"swap":249},{"date":"2016-08-23 12:00","used":3881,"free":20223,"swap":249}]';
 			new JSON2Table({
 				element : "sample-table",
-				keys : ["date", "temp"],
+				keys : ["date", "used", "free", "swap"],
 				json : data,
-				customTitles : ["日付", "温度"],
-				unit : "℃",
-				appendUnitKeys : ["temp"]
+				unit : "MB",
+				appendUnitKeys : ["used", "free", "swap"]
 			});
 			new JSON2LineGraph({
 				element : "canvas",
 				xKey : "date",
-				yKeys : ["temp"],
+				yKeys : ["used", "free", "swap"],
 				json : data,
-				yUnit : "℃"
+				yUnit : "MB"
 			});
 		</script>
 	</body>
