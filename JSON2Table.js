@@ -12,9 +12,9 @@ var JSON2Table = function(options) {
 	json = JSON.parse(options['json']);
 
 	if(options['unit'] !== undefined){
-		unit = options['unit'];
 		if(options['appendUnitKeys'] === undefined)
 			throw 'undefined appendUnitKeys.\nif define unit, define appendUnitKeys.';
+		unit = options['unit'];
 		appendUnitKeys = options['appendUnitKeys'];
 	}else{
 		if(options['appendUnitKeys'] !== undefined)

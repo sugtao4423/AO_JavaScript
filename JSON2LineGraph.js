@@ -61,42 +61,53 @@ var JSON2LineGraph = function(options){
 	graph.width = graph.getBoundingClientRect().width;
 
 	var c = graph.getContext('2d');
-	c.lineWidth = 2;
-	c.strokeStyle = '#000000';
 	c.font = '8pt sans-serif';
 	c.textAlign = 'center';
-
-	// draw base line
-	c.beginPath();
-	c.moveTo(xPadding, 0);
-	c.lineTo(xPadding, graph.height - yPadding);
-	c.lineTo(graph.width - xPadding, graph.height - yPadding);
-	c.stroke();
 
 	// write X line text
 	var oldDate = 0;
 	var lineHeight = c.measureText('あ').width;
 	for(var i = 0; i < json.length; i++){
 		var date = new Date(json[i][xKey]);
+		var xPixel = getXPixel(i);
+		var yPixel = graph.height - yPadding + 20;
+
+		var hhmm = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 		if(oldDate === date.toDateString()){
-			var str = getHM(date);
-			c.fillText(str, getXPixel(i), graph.height - yPadding + 20 + lineHeight);
+			c.fillText(hhmm, xPixel, yPixel + lineHeight);
 		}else{
-			var str = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-			c.fillText(str, getXPixel(i), graph.height - yPadding + 20);
-			c.fillText(getHM(date), getXPixel(i), graph.height - yPadding + 20 + lineHeight);
+			var year = date.getFullYear();
+			var month = ('0' + (date.getMonth() + 1)).slice(-2);
+			var dateOfMonth = ('0' + date.getDate()).slice(-2);
+			var str = year + '-' + month + '-' + dateOfMonth;
+			c.fillText(str, xPixel, yPixel);
+			c.fillText(hhmm, xPixel, yPixel + lineHeight);
 			oldDate = date.toDateString();
-		}
-		function getHM(date){
-			return ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 		}
 	}
 
-	// write Y line text
+	// write Y line text and support line
 	c.textAlign = 'right'
 	c.textBaseline = 'middle';
-	for(var i = 0; i < getMaxY(); i += 10)
-		c.fillText(i + yUnit, xPadding - 10, getYPixel(i));
+	c.lineWidth = 1;
+	c.strokeStyle = '#e0e0e0'
+	for(var i = 0; i < getMaxY(); i += 10){
+		var yPixel = getYPixel(i);
+		c.fillText(i + yUnit, xPadding - 10, yPixel);
+		c.beginPath();
+		c.moveTo(xPadding, yPixel);
+		c.lineTo(graph.width, yPixel);
+		c.stroke();
+	}
+
+	// draw base line
+	c.lineWidth = 2;
+	c.strokeStyle = '#000000';
+	c.beginPath();
+	c.moveTo(xPadding, 0);
+	c.lineTo(xPadding, graph.height - yPadding);
+	c.lineTo(graph.width, graph.height - yPadding);
+	c.stroke();
 
 	// draw line
 	for(var i = 0; i < yKeys.length; i++){
@@ -112,22 +123,24 @@ var JSON2LineGraph = function(options){
 	for(var i = 0; i < yKeys.length; i++){
 		for(var j = 0; j < json.length; j++){
 			var num = Number(json[j][yKeys[i]]);
+			var xPixel = getXPixel(j);
+			var yPixel = getYPixel(num);
 
 			// draw base white point
 			c.beginPath();
 			c.fillStyle = '#ffffff';
-			c.arc(getXPixel(j), getYPixel(num), 6, 0, Math.PI * 2, true);
+			c.arc(xPixel, yPixel, 6, 0, Math.PI * 2, true);
 			c.fill();
 
 			// draw point
 			c.beginPath();
 			c.fillStyle = lineColors[i];
-			c.arc(getXPixel(j), getYPixel(num), 4, 0, Math.PI * 2, true);
+			c.arc(xPixel, yPixel, 4, 0, Math.PI * 2, true);
 			c.fill();
 
 			// write points value
 			c.textAlign = 'center';
-			c.fillText(num + yUnit, getXPixel(j), getYPixel(num) - 15);
+			c.fillText(num + yUnit, xPixel, yPixel - 15);
 		}
 	}
 
