@@ -31,7 +31,7 @@ appendUnitKeys | String Array | 単位を付与するJSONデータのキー |
 JSONデータを折れ線グラフにして表示するJavaScript
 
 1. 描画するcanvas要素を作り、固有のIDを指定  
-    ex. `<canvas id="canvas"></canvas>`
+    ex. `<canvas id="sample-canvas"></canvas>`
 1. `<script>`タグ内で JSON2LineGraph.js を宣言
 
 ```
