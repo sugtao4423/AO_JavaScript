@@ -20,7 +20,7 @@ var JSON2LineGraph = function(options){
 		else
 			lineColors = options['lineColors'];
 	}else{
-		lineColors = ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'];
+		lineColors = ['#0b62a4', '#7a92a3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'];
 	}
 
 	var xPadding = 50;

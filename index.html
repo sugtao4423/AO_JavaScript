@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>json test</title>
+		<title>JSON2 Table LineGraph</title>
 		<script type="text/javascript" src="JSON2Table.js"></script>
 		<script type="text/javascript" src="JSON2LineGraph.js"></script>
 
@@ -17,20 +17,16 @@
 				margin: 20px;
 				border: #ccc 1px solid;
 			}
-
 			table th {
 				padding: 21px 25px 22px 25px;
 				border-top: 1px solid #fafafa;
 				border-bottom: 1px solid #e0e0e0;
 				background: #ededed;
 			}
-
-
 			table tr {
 				text-align: center;
 				padding-left: 20px;
 			}
-
 			table td {
 				padding: 18px;
 				border-top: 1px solid #ffffff;
@@ -54,7 +50,7 @@
 				element : "sample-table",
 				keys : ["date", "temp"],
 				json : data,
-				unit : '℃',
+				unit : "℃",
 				appendUnitKeys : ["temp"]
 			});
 			new JSON2LineGraph({
