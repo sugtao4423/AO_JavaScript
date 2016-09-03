@@ -161,7 +161,7 @@ var JSON2LineGraph = function(options){
 
 	// Return the x pixel for a graph point
 	function getXPixel(val){
-		return ((graph.width - xPadding) / json.length) * val + (xPadding * 1.5);
+		return ((graph.width - xPadding) / json.length) * val + xPadding + 30;
 	}
 
 	// Return the y pixel for a graph point
