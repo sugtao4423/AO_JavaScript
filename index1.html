@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>Main Server Status</title>
+		<title>Main Server Memory</title>
 		<script type="text/javascript" src="JSON2Table.js"></script>
 		<script type="text/javascript" src="JSON2LineGraph.js"></script>
 
@@ -40,6 +40,11 @@
 	<body>
 		<p><a href="index.html">ServerRoom Temperature</a></p>
 
+		<div>
+			<button onclick="mainServerMemory1();">MainServerMemory 1</button>
+			<button onclick="mainServerMemory2();">MainServerMemory 2</button>
+		</div>
+
 		<div id="sample-table" style="width:40%; float:left;"></div>
 
 		<div style="width:60%; left:32%; position:fixed;">
@@ -47,21 +52,35 @@
 		</div>
 
 		<script>
-			var data = '[{"date":"2016-08-21 18:00","used":4086,"free":20017,"swap":252},{"date":"2016-08-22 00:00","used":4138,"free":19965,"swap":252},{"date":"2016-08-22 06:00","used":4344,"free":19760,"swap":251},{"date":"2016-08-22 12:00","used":4311,"free":19792,"swap":251},{"date":"2016-08-22 18:00","used":4292,"free":19812,"swap":250},{"date":"2016-08-23 00:00","used":4235,"free":19869,"swap":249},{"date":"2016-08-23 06:00","used":3961,"free":20143,"swap":249},{"date":"2016-08-23 12:00","used":3881,"free":20223,"swap":249}]';
-			new JSON2Table({
-				element : "sample-table",
-				keys : ["date", "used", "free", "swap"],
-				json : data,
-				unit : "MB",
-				appendUnitKeys : ["used", "free", "swap"]
-			});
-			new JSON2LineGraph({
-				element : "sample-canvas",
-				xKey : "date",
-				yKeys : ["used", "free", "swap"],
-				json : data,
-				yUnit : "MB"
-			});
+			var data;
+			function mainServerMemory1() {
+				data = '[{"date":"2016-07-01 00:00","used":3959,"free":20144,"swap":545},{"date":"2016-07-01 06:00","used":4161,"free":19942,"swap":549},{"date":"2016-07-01 12:00","used":3988,"free":20115,"swap":549},{"date":"2016-07-01 18:00","used":4126,"free":19977,"swap":549},{"date":"2016-07-02 00:00","used":4128,"free":19976,"swap":543},{"date":"2016-07-02 06:00","used":4218,"free":19885,"swap":543},{"date":"2016-07-02 12:00","used":4173,"free":19931,"swap":543},{"date":"2016-07-02 18:00","used":4110,"free":19994,"swap":543},{"date":"2016-07-03 00:00","used":4350,"free":19754,"swap":543},{"date":"2016-07-03 06:00","used":4318,"free":19785,"swap":543}]';
+				mainServerMemory();
+			}
+			function mainServerMemory2() {
+				data = '[{"date":"2016-07-31 06:00","used":3439,"free":20664,"swap":0},{"date":"2016-07-31 12:00","used":3353,"free":20751,"swap":0},{"date":"2016-07-31 18:00","used":3486,"free":20617,"swap":2},{"date":"2016-08-01 00:00","used":3459,"free":20644,"swap":2},{"date":"2016-08-01 06:00","used":3487,"free":20616,"swap":2},{"date":"2016-08-01 12:00","used":3466,"free":20638,"swap":2},{"date":"2016-08-01 18:00","used":3430,"free":20673,"swap":2},{"date":"2016-08-02 00:00","used":3953,"free":20150,"swap":3},{"date":"2016-08-02 06:00","used":3927,"free":20176,"swap":3},{"date":"2016-08-02 12:00","used":3859,"free":20245,"swap":3}]';
+				mainServerMemory();
+			}
+			function mainServerMemory() {
+				var element = document.getElementById("sample-table");
+				if(element.firstChild !== null)
+					element.removeChild(element.firstChild);
+				new JSON2Table({
+					element : "sample-table",
+					keys : ["date", "used", "free", "swap"],
+					json : data,
+					unit : "MB",
+					appendUnitKeys : ["used", "free", "swap"]
+				});
+				new JSON2LineGraph({
+					element : "sample-canvas",
+					xKey : "date",
+					yKeys : ["used", "free", "swap"],
+					json : data,
+					yUnit : "MB"
+				});
+			}
+			window.onload = mainServerMemory1();
 		</script>
 	</body>
 

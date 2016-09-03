@@ -38,7 +38,12 @@
 	</head>
 
 	<body>
-		<p><a href="index1.html">Main Server Status</a></p>
+		<p><a href="index1.html">Main Server Memory</a></p>
+
+		<div>
+			<button onclick="serverRoomTemp1();">ServerRoomTemperature 1</button>
+			<button onclick="serverRoomTemp2();">ServerRoomTemperature 2</button>
+		</div>
 
 		<div id="sample-table" style="width:30%; float:left;"></div>
 
@@ -47,22 +52,36 @@
 		</div>
 
 		<script>
-			var data = '[{"date":"2016-09-01 19:00","temp":"21.93"},{"date":"2016-09-01 20:00","temp":"21.26"},{"date":"2016-09-01 21:00","temp":"22.25"},{"date":"2016-09-01 22:00","temp":"22.02"},{"date":"2016-09-01 23:00","temp":"21.63"},{"date":"2016-09-02 00:00","temp":"21.8"},{"date":"2016-09-02 01:00","temp":"21.73"},{"date":"2016-09-02 02:00","temp":"21.1"},{"date":"2016-09-02 03:00","temp":"22.02"}]';
-			new JSON2Table({
-				element : "sample-table",
-				keys : ["date", "temp"],
-				json : data,
-				customTitles : ["日付", "温度"],
-				unit : "℃",
-				appendUnitKeys : ["temp"]
-			});
-			new JSON2LineGraph({
-				element : "sample-canvas",
-				xKey : "date",
-				yKeys : ["temp"],
-				json : data,
-				yUnit : "℃"
-			});
+			var data;
+			function serverRoomTemp1() {
+				data = '[{"date":"2016-07-01 23:00","temp":"19.4"},{"date":"2016-07-02 00:00","temp":"19.2"},{"date":"2016-07-02 01:00","temp":"19.2"},{"date":"2016-07-02 02:00","temp":"20.43"},{"date":"2016-07-02 03:00","temp":"19.2"},{"date":"2016-07-02 04:00","temp":"18.75"},{"date":"2016-07-02 05:00","temp":"19.33"},{"date":"2016-07-02 06:00","temp":"20.62"},{"date":"2016-07-02 07:00","temp":"18.24"},{"date":"2016-07-02 08:00","temp":"20.49"}]';
+				serverRoomTemp();
+			}
+			function serverRoomTemp2() {
+				data = '[{"date":"2016-08-01 21:00","temp":"22.08"},{"date":"2016-08-01 22:00","temp":"21.3"},{"date":"2016-08-01 23:00","temp":"21.05"},{"date":"2016-08-02 00:00","temp":"20.63"},{"date":"2016-08-02 01:00","temp":"21.13"},{"date":"2016-08-02 02:00","temp":"21.3"},{"date":"2016-08-02 03:00","temp":"20.61"},{"date":"2016-08-02 04:00","temp":"22.37"},{"date":"2016-08-02 05:00","temp":"20.24"},{"date":"2016-08-02 06:00","temp":"22.48"}]';
+				serverRoomTemp();
+			}
+			function serverRoomTemp() {
+				var element = document.getElementById("sample-table");
+				if(element.firstChild !== null)
+					element.removeChild(element.firstChild);
+				new JSON2Table({
+					element : "sample-table",
+					keys : ["date", "temp"],
+					json : data,
+					customTitles : ["日付", "温度"],
+					unit : "℃",
+					appendUnitKeys : ["temp"]
+				});
+				new JSON2LineGraph({
+					element : "sample-canvas",
+					xKey : "date",
+					yKeys : ["temp"],
+					json : data,
+					yUnit : "℃"
+				});
+			}
+			window.onload = serverRoomTemp1();
 		</script>
 	</body>
 
