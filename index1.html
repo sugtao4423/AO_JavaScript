@@ -44,6 +44,9 @@
 		<div>
 			<button onclick="mainServerMemory1();">MainServerMemory 1</button>
 			<button onclick="mainServerMemory2();">MainServerMemory 2</button>
+			<button onclick="mainServerMemory3();">MainServerMemory 3</button>
+			<button onclick="mainServerMemory4();">MainServerMemory 4</button>
+			<p></p>
 		</div>
 
 		<div id="sample-table" style="width:40%; float:left;"></div>
@@ -55,11 +58,19 @@
 		<script>
 			var data;
 			function mainServerMemory1() {
-				data = '[{"date":"2016-07-01 00:00","used":3959,"free":20144,"swap":545},{"date":"2016-07-01 06:00","used":4161,"free":19942,"swap":549},{"date":"2016-07-01 12:00","used":3988,"free":20115,"swap":549},{"date":"2016-07-01 18:00","used":4126,"free":19977,"swap":549},{"date":"2016-07-02 00:00","used":4128,"free":19976,"swap":543},{"date":"2016-07-02 06:00","used":4218,"free":19885,"swap":543},{"date":"2016-07-02 12:00","used":4173,"free":19931,"swap":543},{"date":"2016-07-02 18:00","used":4110,"free":19994,"swap":543},{"date":"2016-07-03 00:00","used":4350,"free":19754,"swap":543},{"date":"2016-07-03 06:00","used":4318,"free":19785,"swap":543}]';
+				data = '[{"date":"2016-08-15 00:00","used":3571,"free":20532,"swap":0},{"date":"2016-08-15 06:00","used":3536,"free":20567,"swap":0},{"date":"2016-08-15 12:00","used":3497,"free":20606,"swap":0},{"date":"2016-08-15 18:00","used":3408,"free":20695,"swap":0},{"date":"2016-08-16 00:00","used":3518,"free":20585,"swap":0},{"date":"2016-08-16 06:00","used":3924,"free":20179,"swap":0},{"date":"2016-08-16 12:00","used":3628,"free":20475,"swap":131},{"date":"2016-08-16 18:00","used":3298,"free":20805,"swap":295},{"date":"2016-08-17 00:00","used":3600,"free":20503,"swap":298},{"date":"2016-08-17 06:00","used":3580,"free":20523,"swap":295}]';
 				mainServerMemory();
 			}
 			function mainServerMemory2() {
-				data = '[{"date":"2016-07-31 06:00","used":3439,"free":20664,"swap":0},{"date":"2016-07-31 12:00","used":3353,"free":20751,"swap":0},{"date":"2016-07-31 18:00","used":3486,"free":20617,"swap":2},{"date":"2016-08-01 00:00","used":3459,"free":20644,"swap":2},{"date":"2016-08-01 06:00","used":3487,"free":20616,"swap":2},{"date":"2016-08-01 12:00","used":3466,"free":20638,"swap":2},{"date":"2016-08-01 18:00","used":3430,"free":20673,"swap":2},{"date":"2016-08-02 00:00","used":3953,"free":20150,"swap":3},{"date":"2016-08-02 06:00","used":3927,"free":20176,"swap":3},{"date":"2016-08-02 12:00","used":3859,"free":20245,"swap":3}]';
+				data = '[{"date":"2016-08-17 12:00","used":3598,"free":20505,"swap":293},{"date":"2016-08-17 18:00","used":3711,"free":20392,"swap":292},{"date":"2016-08-18 00:00","used":3729,"free":20374,"swap":292},{"date":"2016-08-18 06:00","used":3523,"free":20580,"swap":288},{"date":"2016-08-18 12:00","used":3470,"free":20633,"swap":288},{"date":"2016-08-18 18:00","used":3444,"free":20659,"swap":288},{"date":"2016-08-19 00:00","used":3451,"free":20653,"swap":283},{"date":"2016-08-19 06:00","used":3704,"free":20399,"swap":283},{"date":"2016-08-19 12:00","used":3658,"free":20445,"swap":283},{"date":"2016-08-19 18:00","used":3640,"free":20463,"swap":282}]';
+				mainServerMemory();
+			}
+			function mainServerMemory3() {
+				data = '[{"date":"2016-08-20 00:00","used":3870,"free":20233,"swap":279},{"date":"2016-08-20 06:00","used":3753,"free":20350,"swap":278},{"date":"2016-08-20 12:00","used":3754,"free":20349,"swap":277},{"date":"2016-08-20 18:00","used":3792,"free":20311,"swap":277},{"date":"2016-08-21 00:00","used":3853,"free":20250,"swap":275},{"date":"2016-08-21 06:00","used":3913,"free":20190,"swap":254},{"date":"2016-08-21 12:00","used":4036,"free":20067,"swap":253},{"date":"2016-08-21 18:00","used":4086,"free":20017,"swap":252},{"date":"2016-08-22 00:00","used":4138,"free":19965,"swap":252},{"date":"2016-08-22 06:00","used":4344,"free":19760,"swap":251}]';
+				mainServerMemory();
+			}
+			function mainServerMemory4() {
+				data = '[{"date":"2016-08-22 12:00","used":4311,"free":19792,"swap":251},{"date":"2016-08-22 18:00","used":4292,"free":19812,"swap":250},{"date":"2016-08-23 00:00","used":4235,"free":19869,"swap":249},{"date":"2016-08-23 06:00","used":3961,"free":20143,"swap":249},{"date":"2016-08-23 12:00","used":3881,"free":20223,"swap":249},{"date":"2016-08-23 18:00","used":3770,"free":20333,"swap":248},{"date":"2016-08-24 00:00","used":3793,"free":20310,"swap":248},{"date":"2016-08-24 06:00","used":3806,"free":20297,"swap":248},{"date":"2016-08-24 12:00","used":3751,"free":20353,"swap":248},{"date":"2016-08-24 18:00","used":3966,"free":20137,"swap":247}]';
 				mainServerMemory();
 			}
 			function mainServerMemory() {
